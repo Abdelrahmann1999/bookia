@@ -45,8 +45,7 @@ class welcomeScreen extends StatelessWidget {
                   mainButton(
                     text: "Register",
                     onPressed: () {
-                      context.pushTo(Routes.register  
-                      );
+                      context.pushTo(Routes.register);
                     },
                     BGcolor: AppColors.white,
                     textColor: AppColors.black,

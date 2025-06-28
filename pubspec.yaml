@@ -13,6 +13,16 @@ dependencies:
   gap: ^3.0.1
   go_router: ^15.2.0
   pinput: ^5.0.1
+  dio: ^5.8.0+1
+  http: ^1.4.0
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.7
+  lottie: ^3.3.1
+  shared_preferences: ^2.5.3
+  carousel_slider: ^5.1.1
+  smooth_page_indicator: ^1.2.1
+  skeletonizer: ^2.0.1
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +50,7 @@ flutter:
     - Assets\Images\Successmark (1).svg
     - Assets\Images\alif-caesar-rizqi-pratama-loUlSOXL81c-unsplash 1.png
     - Assets\Icons\fluent_eye-20-filled.svg
+    - Assets\Images\Animation - 1750456177238.json
    
     
 

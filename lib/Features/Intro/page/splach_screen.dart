@@ -1,5 +1,6 @@
 import 'package:bookia/core/Constants/AppAssete.dart';
 import 'package:bookia/core/Extensions/navigation.dart';
+import 'package:bookia/core/Services/shared_pref.dart';
 import 'package:bookia/core/Utils/text_styles.dart';
 import 'package:bookia/core/routers/routers.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,14 @@ class _SplachScreenState extends State<SplachScreen> {
   @override
   void initState() {
     super.initState();
+
     Future.delayed(Duration(seconds: 2), () {
-      context.pushWithReplacement(Routes.welcome);
+     
+      final token = SharedPref.getUserTokin();
+
+      context.pushWithReplacement(
+        token.isNotEmpty ? Routes.main : Routes.welcome,
+      );
     });
   }
 

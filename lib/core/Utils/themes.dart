@@ -37,5 +37,13 @@ class AppThemes {
         borderSide: BorderSide(color: Colors.red),
       ),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.white,
+      selectedItemColor: AppColors.primary,
+      unselectedItemColor: AppColors.grey,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+    ),
   );
 }

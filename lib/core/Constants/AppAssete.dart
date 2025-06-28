@@ -14,6 +14,8 @@ class Appassetes {
   static const String closeSvg = "Assets/Icons/close.svg";
   static const String logoutSvg = "Assets/Icons/Logout.svg";
   static const String cameraSvg = "Assets/Icons/camera.svg";
-  static const String welcomePG = "Assets/Images/alif-caesar-rizqi-pratama-loUlSOXL81c-unsplash 1.png";
-
+  static const String welcomePG =
+      "Assets/Images/alif-caesar-rizqi-pratama-loUlSOXL81c-unsplash 1.png";
+  static const String bookLoadin =
+      "Assets/Images/Animation - 1750456177238.json";
 }

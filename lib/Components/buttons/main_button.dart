@@ -12,6 +12,7 @@ class mainButton extends StatelessWidget {
     this.borderColor,
     this.height,
     this.width,
+    this.borderRadius,
   });
   final double? height;
   final double? width;
@@ -20,6 +21,7 @@ class mainButton extends StatelessWidget {
   final Color? BGcolor;
   final Color? textColor;
   final Color? borderColor;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class mainButton extends StatelessWidget {
           backgroundColor: BGcolor ?? AppColors.primary,
 
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(borderRadius ?? 10),
           ),
         ),
         child: Text(
