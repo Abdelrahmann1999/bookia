@@ -8,6 +8,7 @@ import 'package:bookia/Features/auth/presentation/page/login_screen.dart';
 import 'package:bookia/Features/auth/presentation/page/otp_verification_screen.dart';
 import 'package:bookia/Features/auth/presentation/page/passwoed_changed.dart';
 import 'package:bookia/Features/auth/presentation/page/register_screen.dart';
+import 'package:bookia/Features/cart/presintation/page/checkout_screen.dart';
 import 'package:bookia/Features/main/main_app_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,6 +23,7 @@ class Routes {
   static const String passwordChanged = '/passwordChanged';
   static const String main = '/main';
   static const String details = '/details';
+  static const String checkout = '/Checkout';
 
   static final GoRouter routers = GoRouter(
     routes: [
@@ -51,6 +53,7 @@ class Routes {
         builder: (context, state) =>
             BookDetailsScreen(product: state.extra as Product),
       ),
+       GoRoute(path: checkout, builder: (context, state) => CheckoutScreen()),
     ],
   );
 }

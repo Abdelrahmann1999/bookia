@@ -9,3 +9,5 @@ class WIshListSuccessState extends WishListState {}
 class removedFromWishlistState extends WishListState {}
 
 class WIshListFailureState extends WishListState {}
+
+class AddedToCartSate extends WishListState {}

@@ -1,4 +1,3 @@
-
 class ResetPasswordParams {
   final String verifyCode;
   final String newPassword;

@@ -40,6 +40,11 @@ class WishlistScreen extends StatelessWidget {
                 "Removed From WishList",
                 DialogType.success,
               );
+            } else if (state is AddedToCartSate) {
+              if (context.canPop()) {
+                context.pop();
+              }
+              showMainDialog(context, "Added To Cart", DialogType.success);
             }
           },
           builder: (context, state) {
@@ -102,7 +107,9 @@ class WishlistScreen extends StatelessWidget {
                           Gap(20),
                           mainButton(
                             text: "Add To Cart",
-                            onPressed: () {},
+                            onPressed: () {
+                              cubit.addToCart(book?.id ?? 0);
+                            },
                             width: 270,
                             height: 50,
                             borderRadius: 5,

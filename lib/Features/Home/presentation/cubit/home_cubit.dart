@@ -4,6 +4,7 @@ import 'package:bookia/Features/Home/data/model/slider_response/slider.dart';
 import 'package:bookia/Features/Home/data/model/slider_response/slider_response.dart';
 import 'package:bookia/Features/Home/data/repo/home_repo.dart';
 import 'package:bookia/Features/Home/presentation/cubit/home_state.dart';
+import 'package:bookia/Features/cart/data/repo/cart_repo.dart';
 import 'package:bookia/Features/wishlist/data/repo/wishlist_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +38,20 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       var response = await WishlistRepo.addTOWishlist(productId);
       if (response) {
-        emit(AddedToWishlistState());
+        emit(AddedToWishlistCartState(message: "Added To Wishlist"));
+      } else {
+        emit(HomeFailureState());
+      }
+    } on Exception catch (_) {
+      emit(HomeFailureState());
+    }
+  }
+  Future<void> addToCart(int productId) async {
+    emit(HomeLoadingState());
+    try {
+      var response = await CartRepo.addTOCartRepolist(productId);
+      if (response) {
+        emit(AddedToWishlistCartState(message: "Added To Cart"));
       } else {
         emit(HomeFailureState());
       }

@@ -1,3 +1,5 @@
+
+import 'package:bookia/Features/cart/data/repo/cart_repo.dart';
 import 'package:bookia/Features/wishlist/data/model/get_wishlist_response/get_wishlist_response.dart';
 import 'package:bookia/Features/wishlist/data/repo/wishlist_repo.dart';
 import 'package:bookia/Features/wishlist/presintation/cubit/wishlist_state.dart';
@@ -33,5 +35,18 @@ class WishlistCupit extends Cubit<WishListState> {
         emit(WIshListFailureState());
       }
     });
+  }
+   Future<void> addToCart(int productId) async {
+    emit(WIshListLoadingState());
+    try {
+      var response = await CartRepo.addTOCartRepolist(productId);
+      if (response) {
+        emit(AddedToCartSate());
+      } else {
+        emit(WIshListFailureState());
+      }
+    } on Exception catch (_) {
+      emit(WIshListFailureState());
+    }
   }
 }

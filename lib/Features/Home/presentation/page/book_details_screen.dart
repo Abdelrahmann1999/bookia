@@ -24,9 +24,9 @@ class BookDetailsScreen extends StatelessWidget {
       create: (context) => HomeCubit(),
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
-          if (state is AddedToWishlistState) {
+          if (state is AddedToWishlistCartState) {
             context.pop();
-            showMainDialog(context, "Added To WishList", DialogType.success);
+            showMainDialog(context, state.message, DialogType.success);
           } else if (state is HomeFailureState) {
             context.pop();
             showMainDialog(context, "Something Went Wrong", DialogType.error);
@@ -113,7 +113,9 @@ class BookDetailsScreen extends StatelessWidget {
                   ),
                   mainButton(
                     text: "Add To Cart",
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<HomeCubit>().addToCart(product.id ?? 0);
+                    },
                     height: 55,
                     width: 250,
                     textColor: AppColors.white,

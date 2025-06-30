@@ -10,4 +10,9 @@ class Appconstants {
   static const wishlist = "wishlist";
   static const addToWishlist = "add-to-wishlist";
   static const removeFromWishlist = "remove-from-wishlist";
+  static const cart = "cart";
+  static const addTocartlist = "add-to-cart";
+  static const removeFromcartlist = "remove-from-cart";
+  static const updateCart = "update-cart";
+  static const checkOut = "checkout";
 }

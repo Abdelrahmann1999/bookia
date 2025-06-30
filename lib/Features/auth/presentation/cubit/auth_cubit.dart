@@ -102,31 +102,30 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
- Future<void> resetPassword({
-  required String verifyCode,
-  required String newPassword,
-  required String confirmPassword,
-}) async {
-  emit(AuthloadingState());
-  try {
-    final params = ResetPasswordParams(
-      verifyCode: verifyCode,
-      newPassword: newPassword,
-      newPasswordConfirmation: confirmPassword,
-    );
+  Future<void> resetPassword({
+    required String verifyCode,
+    required String newPassword,
+    required String confirmPassword,
+  }) async {
+    emit(AuthloadingState());
+    try {
+      final params = ResetPasswordParams(
+        verifyCode: verifyCode,
+        newPassword: newPassword,
+        newPasswordConfirmation: confirmPassword,
+      );
 
-    final result = await AuthRepo.resetPassword(params);
-    print("Reset API Result: $result");
+      final result = await AuthRepo.resetPassword(params);
+      print("Reset API Result: $result");
 
-    if (result != null) {
-      emit(AuthResetPasswordSuccessState());
-    } else {
-      emit(AuthfailureState("فشل في إعادة تعيين كلمة المرور"));
+      if (result != null) {
+        emit(AuthResetPasswordSuccessState());
+      } else {
+        emit(AuthfailureState("فشل في إعادة تعيين كلمة المرور"));
+      }
+    } catch (e) {
+      print("Reset Error: $e");
+      emit(AuthfailureState("حدث خطأ أثناء إعادة التعيين"));
     }
-  } catch (e) {
-    print("Reset Error: $e");
-    emit(AuthfailureState("حدث خطأ أثناء إعادة التعيين"));
   }
-}
-
 }
