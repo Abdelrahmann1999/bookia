@@ -6,7 +6,10 @@ extension NavigationExtension on BuildContext {
     push(routeName, extra: extra);
   }
 
-  void pushWithReplacement(String routeName) {
+  void pushWithReplacement(
+    String routeName, {
+    required Map<String, dynamic> extra,
+  }) {
     pushReplacement(routeName);
   }
 

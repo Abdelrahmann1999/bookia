@@ -14,5 +14,4 @@ class CartFailureState extends CartState {}
 
 class CheckOutOrderDoneState extends CartState {}
 
-
 class UpdateCartLoadingState extends CartState {}

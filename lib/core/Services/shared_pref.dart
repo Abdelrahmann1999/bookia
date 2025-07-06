@@ -34,6 +34,11 @@ class SharedPref {
     return getString(ktokin);
   }
 
+  static Future<void> removeUserData() async {
+    await remove(ktokin);
+    await remove(kUserInfo);
+  }
+
   static Future<void> setString(String key, String value) async {
     await prefs.setString(key, value);
   }

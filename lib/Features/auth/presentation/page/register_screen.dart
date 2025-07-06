@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bookia/Components/buttons/main_back_button.dart';
 import 'package:bookia/Components/buttons/main_button.dart';
 import 'package:bookia/Components/dialogs/loading_dialog.dart';
@@ -55,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   TextButton(
                     onPressed: () {
-                      context.pushWithReplacement(Routes.login);
+                      context.pushWithReplacement(Routes.login, extra: {});
                     },
                     child: Text("Login Now", style: TextStyle(fontSize: 17)),
                   ),

@@ -15,4 +15,6 @@ class Appconstants {
   static const removeFromcartlist = "remove-from-cart";
   static const updateCart = "update-cart";
   static const checkOut = "checkout";
+  static const logout = "logout";
+  static const editProfile = "update-profile";
 }

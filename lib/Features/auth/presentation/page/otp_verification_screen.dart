@@ -47,10 +47,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         listener: (context, state) {
           var cubit = context.read<AuthCubit>();
           if (state is AuthVerifyCodeSuccessState) {
-            cubit.setOtpCode(otpCode);
-
-            context.pop();
-            context.pushToPase(Routes.createNewPass);
+            context.pushReplacement(
+              Routes.createNewPass,
+              extra: CheckOtpParams(
+                email: cubit.emailController.text,
+                verifyCode: otpCode,
+              ),
+            );
           } else if (state is AuthfailureState) {
             context.pop();
             showMainDialog(context, state.message);

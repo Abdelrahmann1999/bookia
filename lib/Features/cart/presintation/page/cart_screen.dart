@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:bookia/Components/buttons/main_button.dart';
 import 'package:bookia/Components/dialogs/loading_dialog.dart';
 import 'package:bookia/Features/cart/data/model/update_cart_params.dart';
 import 'package:bookia/Features/cart/presintation/cubit/cart_cupit.dart';
 import 'package:bookia/Features/cart/presintation/cubit/cart_state.dart';
-
 import 'package:bookia/core/Constants/AppAssete.dart';
 import 'package:bookia/core/Extensions/navigation.dart';
 import 'package:bookia/core/Utils/AppColors.dart';

@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:bookia/Components/buttons/main_back_button.dart';
 import 'package:bookia/Components/buttons/main_button.dart';
 import 'package:bookia/Components/dialogs/loading_dialog.dart';
 import 'package:bookia/Components/inputs/name_text_form_feild.dart';
+import 'package:bookia/Features/auth/data/model/request/verify_code_params.dart';
 import 'package:bookia/Features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/Features/auth/presentation/cubit/auth_state.dart';
 import 'package:bookia/core/Extensions/navigation.dart';
@@ -13,19 +16,29 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class CreateNewPassScreen extends StatefulWidget {
-  const CreateNewPassScreen({super.key});
+  const CreateNewPassScreen({super.key, required this.checkOtpParams});
+  final CheckOtpParams checkOtpParams;
 
   @override
   State<CreateNewPassScreen> createState() => _CreateNewPassScreenState();
 }
 
 class _CreateNewPassScreenState extends State<CreateNewPassScreen> {
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    log(
+      "Received OTP in Reset Password Screen: ${widget.checkOtpParams.verifyCode}",
+    );
+
+    context.read<AuthCubit>().setOtpCode(widget.checkOtpParams.verifyCode);
+  }
+
   Widget build(BuildContext context) {
     final cubit = context.read<AuthCubit>();
+
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthResetPasswordSuccessState) {
@@ -43,12 +56,10 @@ class _CreateNewPassScreenState extends State<CreateNewPassScreen> {
             automaticallyImplyLeading: false,
             title: MainBackButton(),
           ),
-
           body: Padding(
             padding: const EdgeInsets.all(22.0),
             child: Form(
-              key: cubit.formKey,
-
+              key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -81,11 +92,12 @@ class _CreateNewPassScreenState extends State<CreateNewPassScreen> {
                     },
                   ),
                   Gap(40),
-
                   mainButton(
                     text: "Reset Password",
                     onPressed: () {
-                      if (cubit.formKey.currentState!.validate()) {
+                      if (formKey.currentState!.validate()) {
+                        print("OTP CODE: ${cubit.otpCode}");
+
                         cubit.resetPassword(
                           verifyCode: cubit.otpCode ?? "",
                           newPassword: cubit.passwordController.text,

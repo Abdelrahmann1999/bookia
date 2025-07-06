@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bookia/Components/buttons/main_back_button.dart';
 import 'package:bookia/Components/buttons/main_button.dart';
 import 'package:bookia/Components/dialogs/loading_dialog.dart';
@@ -19,7 +17,8 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class loginScreen extends StatefulWidget {
-  const loginScreen({super.key});
+  final String password;
+  const loginScreen({super.key, required this.password});
 
   @override
   State<loginScreen> createState() => _loginScreenState();
@@ -43,6 +42,12 @@ class _loginScreenState extends State<loginScreen> {
         },
         builder: (context, state) {
           var cubit = context.read<AuthCubit>();
+
+          if (widget.password.isNotEmpty &&
+              cubit.passwordController.text.isEmpty) {
+            cubit.passwordController.text = widget.password;
+          }
+
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
@@ -53,10 +58,9 @@ class _loginScreenState extends State<loginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Don’t have an account?", style: TextStyles.getBody()),
-
                   TextButton(
                     onPressed: () {
-                      context.pushWithReplacement(Routes.register);
+                      context.pushWithReplacement(Routes.register, extra: {});
                     },
                     child: Text("Register Now", style: TextStyle(fontSize: 17)),
                   ),
@@ -89,7 +93,6 @@ class _loginScreenState extends State<loginScreen> {
                           }
                           return null;
                         },
-
                         controller: cubit.emailController,
                         hintText: "Enter Your Email",
                       ),
@@ -101,7 +104,6 @@ class _loginScreenState extends State<loginScreen> {
                           }
                           return null;
                         },
-
                         controller: cubit.passwordController,
                         hintText: "Enter Your Password",
                         suffixIcon: IconButton(
@@ -163,24 +165,14 @@ class _loginScreenState extends State<loginScreen> {
                         children: [
                           Container(
                             margin: EdgeInsets.only(left: 12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
                             child: SvgPicture.asset(Appassetes.facebookLogoSvg),
                           ),
                           Container(
                             margin: EdgeInsets.only(left: 12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-
                             child: SvgPicture.asset(Appassetes.googleLogoSvg),
                           ),
                           Container(
                             margin: EdgeInsets.only(left: 12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
                             child: SvgPicture.asset(Appassetes.appleLogoSvg),
                           ),
                         ],

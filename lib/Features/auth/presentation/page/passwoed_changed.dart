@@ -1,9 +1,11 @@
 import 'package:bookia/Components/buttons/main_button.dart';
+import 'package:bookia/Features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/core/Constants/AppAssete.dart';
 import 'package:bookia/core/Extensions/navigation.dart';
 import 'package:bookia/core/Utils/text_styles.dart';
 import 'package:bookia/core/routers/routers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
@@ -36,7 +38,15 @@ class PasswordChangedScreen extends StatelessWidget {
               mainButton(
                 text: "Back To Login",
                 onPressed: () {
-                  context.pushWithReplacement(Routes.login);
+                  context.pushWithReplacement(
+                    Routes.login,
+                    extra: {
+                      'password': context
+                          .read<AuthCubit>()
+                          .passwordController
+                          .text,
+                    },
+                  );
                 },
               ),
             ],

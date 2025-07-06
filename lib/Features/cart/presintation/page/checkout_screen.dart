@@ -33,7 +33,7 @@ class CheckoutScreen extends StatelessWidget {
               mainButton(
                 text: "Back To Home",
                 onPressed: () {
-                  context.pushWithReplacement(Routes.login);
+                  context.pushWithReplacement(Routes.main, extra: {});
                 },
               ),
             ],

@@ -24,6 +24,7 @@ class _SplachScreenState extends State<SplachScreen> {
 
       context.pushWithReplacement(
         token.isNotEmpty ? Routes.main : Routes.welcome,
+        extra: {},
       );
     });
   }

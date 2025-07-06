@@ -77,7 +77,6 @@ class CartRepo {
       var response = await DioProvider.get(
         endpoint: Appconstants.checkOut,
         headers: {"Authorization": "Bearer ${SharedPref.getUserTokin()}"},
-      
       );
       if (response.statusCode == 200) {
         return true;

@@ -50,7 +50,7 @@ class ForgetPasswordScreen extends StatelessWidget {
 
                   TextButton(
                     onPressed: () {
-                      context.pushWithReplacement(Routes.login);
+                      context.pushWithReplacement(Routes.login, extra: {});
                     },
                     child: Text("Login", style: TextStyle(fontSize: 17)),
                   ),

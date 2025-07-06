@@ -46,6 +46,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeFailureState());
     }
   }
+
   Future<void> addToCart(int productId) async {
     emit(HomeLoadingState());
     try {
