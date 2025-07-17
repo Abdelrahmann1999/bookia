@@ -5,6 +5,7 @@ import 'package:bookia/Features/auth/data/model/response/user_response/user.dart
 import 'package:bookia/Features/auth/data/repo/auth_repo.dart';
 import 'package:bookia/Features/auth/presentation/cubit/auth_state.dart';
 import 'package:bookia/core/Services/shared_pref.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -75,19 +76,34 @@ class AuthCubit extends Cubit<AuthState> {
   forgetPassword() {
     params.email = emailController.text;
     emit(AuthloadingState());
-    try {
-      AuthRepo.forgetPassword(params).then((value) {
-        if (value != null) {
-          SharedPref.setUserInfo(value.data?.user ?? User());
-          SharedPref.setUserTokin(value.data?.token ?? "");
-          emit(AuthsuccessState());
-        } else {
-          emit(AuthfailureState());
-        }
-      });
-    } on Exception catch (_) {
-      print("error");
-    }
+
+    AuthRepo.forgetPassword(params)
+        .then((value) {
+          if (value != null) {
+            SharedPref.setUserInfo(value.data?.user ?? User());
+            SharedPref.setUserTokin(value.data?.token ?? "");
+            emit(AuthsuccessState());
+          } else {
+            emit(
+              AuthfailureState("لم يتم العثور على حساب بهذا البريد الإلكتروني"),
+            );
+          }
+        })
+        .catchError((error) {
+          if (error is DioException) {
+            print("🔴 DioException: ${error.response?.statusCode}");
+            print("🔴 Response Data: ${error.response?.data}");
+
+            final message =
+                error.response?.data["message"] ??
+                error.response?.data["error"] ??
+                "حدث خطأ غير متوقع";
+
+            emit(AuthfailureState(message));
+          } else {
+            emit(AuthfailureState("حدث خطأ غير متوقع"));
+          }
+        });
   }
 
   Future<void> verifyOtp(CheckOtpParams params) async {

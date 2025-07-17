@@ -29,6 +29,7 @@ class ForgetPasswordScreen extends StatelessWidget {
             context.pushToPase(Routes.otpverification);
           } else if (state is AuthfailureState) {
             context.pop();
+            print("❌ ForgetPassword Error: ${state.message}");
             showMainDialog(context, "Something Went Wrong");
           } else if (state is AuthloadingState) {
             showLoadingDialog(context);

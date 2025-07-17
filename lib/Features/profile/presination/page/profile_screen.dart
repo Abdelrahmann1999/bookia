@@ -5,6 +5,7 @@ import 'package:bookia/Features/profile/presination/widgets/profile_header.dart'
 import 'package:bookia/Features/profile/presination/widgets/profile_tile.dart';
 import 'package:bookia/core/Constants/AppAssete.dart';
 import 'package:bookia/core/Extensions/navigation.dart';
+import 'package:bookia/core/Services/shared_pref.dart';
 import 'package:bookia/core/routers/routers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,9 +13,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -49,7 +55,8 @@ class ProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                profileHeader(),
+                const ProfileHeader(),
+
                 Gap(30),
                 Column(
                   children: [
@@ -57,12 +64,24 @@ class ProfileScreen extends StatelessWidget {
                     Gap(10),
                     profileTile(
                       label: "Edit Profile",
-                      Ontap: () {
-                        context.pushTo(Routes.editProfile);
+                      Ontap: () async {
+                        final updated = await context.push<bool>(
+                          Routes.editProfile,
+                        );
+                        if (updated == true) {
+                          setState(() {
+                            SharedPref.getUserInfo();
+                          });
+                        }
                       },
                     ),
                     Gap(10),
-                    profileTile(label: "Reset Password", Ontap: () {}),
+                    profileTile(
+                      label: "Reset Password",
+                      Ontap: () {
+                        context.push(Routes.resetPassword);
+                      },
+                    ),
                     Gap(10),
                     profileTile(label: "FAQ", Ontap: () {}),
                     Gap(10),

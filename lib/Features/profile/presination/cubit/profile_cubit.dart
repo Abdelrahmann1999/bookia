@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitila());
 
-
   logout() {
     emit(ProfileLodaingState());
 
@@ -21,6 +20,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       }
     });
   }
+
   editProfile(EditProfileParams params) {
     emit(ProfileLodaingState());
 
@@ -33,5 +33,24 @@ class ProfileCubit extends Cubit<ProfileState> {
       }
     });
   }
+
+  changePassword(
+    String currentPassword,
+    String newPassword,
+    String confirmPassword,
+  ) {
+    emit(ProfileLodaingState());
+
+    ProfileRepo.changePassword(
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    ).then((value) {
+      if (value == true) {
+        emit(ProfileSuccessState());
+      } else {
+        emit(ProfileErrorState());
+      }
+    });
+  }
 }
-  

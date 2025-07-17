@@ -9,9 +9,11 @@ import 'package:bookia/Features/auth/presentation/page/login_screen.dart';
 import 'package:bookia/Features/auth/presentation/page/otp_verification_screen.dart';
 import 'package:bookia/Features/auth/presentation/page/passwoed_changed.dart';
 import 'package:bookia/Features/auth/presentation/page/register_screen.dart';
+import 'package:bookia/Features/profile/presination/page/reset_password.dart';
 import 'package:bookia/Features/cart/presintation/page/checkout_screen.dart';
 import 'package:bookia/Features/main/main_app_screen.dart';
 import 'package:bookia/Features/profile/presination/page/edit_profile_screen.dart';
+import 'package:bookia/Features/profile/presination/page/profile_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class Routes {
@@ -23,10 +25,15 @@ class Routes {
   static const String otpverification = '/otpverification';
   static const String createNewPass = '/createNewPass';
   static const String passwordChanged = '/passwordChanged';
+  static const String resetPassword = '/resetPassword';
+
   static const String main = '/main';
   static const String details = '/details';
   static const String checkout = '/checkout';
   static const String editProfile = '/editProfile';
+  static const String profile = '/profile';
+  static const String fullImage = '/fullImage';
+
 
   static final GoRouter routers = GoRouter(
     routes: [
@@ -66,7 +73,12 @@ class Routes {
             BookDetailsScreen(product: state.extra as Product),
       ),
       GoRoute(path: checkout, builder: (context, state) => CheckoutScreen()),
-      GoRoute(path: editProfile, builder: (context, state) => EditProfileScreen()),
+      GoRoute(
+        path: editProfile,
+        builder: (context, state) => EditProfileScreen(),
+      ),
+      GoRoute(path: profile, builder: (context, state) => ProfileScreen()),
+      GoRoute(path: resetPassword, builder: (context, state) => ResetPassword()),
     ],
   );
 }

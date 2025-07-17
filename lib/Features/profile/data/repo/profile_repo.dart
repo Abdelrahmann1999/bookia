@@ -21,11 +21,13 @@ class ProfileRepo {
     }
   }
 
-  static Future<EditProfileResponse?> editProfile(EditProfileParams params) async {
+  static Future<EditProfileResponse?> editProfile(
+    EditProfileParams params,
+  ) async {
     try {
       var response = await DioProvider.post(
         endpoint: Appconstants.editProfile,
-        data: params.toFormData(),
+        data: await params.toFormData(),
         headers: {"Authorization": "Bearer ${SharedPref.getUserTokin()}"},
       );
       if (response.statusCode == 200) {
@@ -35,6 +37,32 @@ class ProfileRepo {
       }
     } on Exception catch (_) {
       return null;
+    }
+  }
+
+  static Future<bool> changePassword(
+    String currentPassword,
+    String newPassword,
+    String confirmPassword,
+  ) async {
+    try {
+      var response = await DioProvider.post(
+        endpoint: Appconstants.updatePassword,
+        data: {
+          "current_password": currentPassword,
+          "new_password": newPassword,
+          "confirm_password": confirmPassword,
+        },
+        headers: {"Authorization": "Bearer ${SharedPref.getUserTokin()}"},
+      );
+
+      print('🔁 Status Code: ${response.statusCode}');
+      print('📥 Response Data: ${response.data}');
+
+      return response.statusCode == 200;
+    } catch (e) {
+      print('❌ Error in changePassword: $e');
+      return false;
     }
   }
 }

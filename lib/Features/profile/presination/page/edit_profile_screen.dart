@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bookia/Components/buttons/main_back_button.dart';
 import 'package:bookia/Components/buttons/main_button.dart';
 import 'package:bookia/Components/dialogs/loading_dialog.dart';
@@ -9,7 +8,9 @@ import 'package:bookia/Features/profile/data/model/edit_profile_params.dart';
 import 'package:bookia/Features/profile/presination/cubit/profile_cubit.dart';
 import 'package:bookia/Features/profile/presination/cubit/profile_state.dart';
 import 'package:bookia/core/Constants/AppAssete.dart';
+import 'package:bookia/core/Extensions/navigation.dart';
 import 'package:bookia/core/Services/shared_pref.dart';
+import 'package:bookia/core/routers/routers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,8 +50,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is ProfileSuccessState) {
-            context.pop();
-            context.pop();
+            context.pop(true);
+            context.pushWithReplacement(Routes.profile, extra: {});
           } else if (state is ProfileErrorState) {
             context.pop();
             showMainDialog(context, "Something Went Wrong");

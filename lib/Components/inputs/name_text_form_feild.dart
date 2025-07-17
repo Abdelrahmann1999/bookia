@@ -20,6 +20,8 @@ class nameTextFormFeild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      
+      
       obscureText: obsecureText,
       keyboardType: keyboardType,
       controller: controller,
@@ -27,6 +29,7 @@ class nameTextFormFeild extends StatelessWidget {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       decoration: InputDecoration(
+      
         hintText: hintText,
         suffixIcon: suffixIcon,
         suffixIconConstraints: BoxConstraints(maxWidth: 50),

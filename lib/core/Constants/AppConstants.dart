@@ -17,4 +17,5 @@ class Appconstants {
   static const checkOut = "checkout";
   static const logout = "logout";
   static const editProfile = "update-profile";
+  static const updatePassword = "update-password";
 }

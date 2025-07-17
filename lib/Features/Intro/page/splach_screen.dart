@@ -20,12 +20,14 @@ class _SplachScreenState extends State<SplachScreen> {
     super.initState();
 
     Future.delayed(Duration(seconds: 2), () {
-      final token = SharedPref.getUserTokin();
+      context.pushTo(Routes.login);
 
-      context.pushWithReplacement(
-        token.isNotEmpty ? Routes.main : Routes.welcome,
-        extra: {},
-      );
+      // final token = SharedPref.getUserTokin();
+
+      // context.pushWithReplacement(
+      //   token.isNotEmpty ? Routes.main : Routes.welcome,
+      //   extra: {},
+      // );
     });
   }
 
